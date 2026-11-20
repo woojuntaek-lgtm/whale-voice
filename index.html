@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07131c">
+<title>고래의 한 문장</title>
+<meta name="description" content="당신의 목소리도 평화의 일부입니다 — 30초 작은 결단 게임, 남에게 묻기 전 내가 원하는 것 한 문장, 누이 좋고 매부 좋고 그럼 나는?, 실행과 태만 1분 계기판. 에니어그램 9번(중재자) 이야기로 만든 앱">
+<style>:root{--bg:#07131c;--card:#0f1f2b;--card2:#162a38;--fg:#eef5f8;--mut:#9fb4c0;--line:#24394a;--am:#e8c35a;--ok:#7ee0a0;--bad:#ff7a6a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:560px;margin:0 auto;padding:12px 14px 40px}
+h1{font-size:1.2rem;margin:6px 0}
+h1 small{display:block;font-size:.76rem;color:var(--mut);font-weight:400}
+.tabs{display:flex;gap:5px;margin:10px 0}
+.tabs button{flex:1;padding:9px 2px;border:1px solid var(--line);background:var(--card);color:var(--mut);border-radius:10px;font-size:.82rem;font-weight:600}
+.tabs button.on{background:#e8c35a;color:#07131c;border-color:#e8c35a}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}
+h2{font-size:1rem;margin:2px 0 8px}
+.note{font-size:.86rem;color:var(--mut);margin:8px 0 0}
+.note b{color:var(--fg)}
+.btn{padding:12px 14px;border-radius:12px;border:0;background:linear-gradient(135deg,#c9952a,#f2d77e);color:#1a1204;font-weight:800;font-size:.95rem;flex:1}
+.btn.sec{background:var(--card2);border:1px solid var(--line);color:var(--fg);font-weight:700}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{padding:7px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card2);color:var(--fg);font-size:.84rem}
+.pill.on{border-color:var(--am);background:#3a3010}
+.lbl{font-size:.8rem;color:var(--mut)}
+label.f{display:block;font-size:.84rem;color:var(--mut);margin:12px 0 4px}
+input[type=text]{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--fg);font-size:.95rem}
+input[type=range]{width:100%;accent-color:#ffb020}
+.sl{display:grid;grid-template-columns:70px 1fr 64px;gap:8px;align-items:center;font-size:.86rem;margin-top:8px}
+.sl b{text-align:right}
+canvas{display:block;width:100%;border-radius:12px;background:#05101a;margin-top:8px;touch-action:none;user-select:none;-webkit-user-select:none}
+.hud{display:flex;justify-content:space-between;font-weight:800;font-variant-numeric:tabular-nums;font-size:.92rem}
+.hud b{color:var(--am)}
+.say{background:#1d2a24;border-left:3px solid var(--am);border-radius:8px;padding:9px 11px;font-size:.92rem;margin-top:10px}
+.say b{color:#f2d77e}
+.res{margin-top:10px;font-size:.92rem;border-radius:10px;padding:10px 12px}
+.res.g{background:#14301f;border:1px solid #2f7a52}.res.r{background:#3a1d1d;border:1px solid #8a3a3a}.res.y{background:#3a3218;border:1px solid #8a7a3a}
+.opts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.opts button{text-align:left;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--fg);font-size:.92rem}
+.opts button.pick{border-color:var(--am);background:#3a3010}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cards button{min-height:96px;border-radius:12px;border:1px solid var(--line);background:#eef5f8;color:#07131c;font-size:.9rem;font-weight:700;padding:10px;line-height:1.45}
+.cards button.flip{background:#2c2610;color:#f2d77e;border-color:var(--am);font-weight:600}
+.cards button:last-child:nth-child(odd){grid-column:1/-1}
+.it{margin-top:10px}.it .q{font-size:.9rem}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:5px}
+.seg button{padding:7px 2px;border-radius:8px;border:1px solid var(--line);background:var(--card2);color:var(--mut);font-size:.76rem}
+.seg button.on{background:#e8c35a;color:#07131c;border-color:#e8c35a;font-weight:700}
+.tw{overflow-x:auto;margin-top:10px;border-radius:10px;border:1px solid var(--line)}
+table.df{border-collapse:collapse;width:100%;font-size:.85rem}
+table.df th,table.df td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.df th{color:var(--mut);font-weight:600;width:32%;background:#122330}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{padding:6px 10px;border-radius:999px;background:var(--card2);border:1px solid var(--line);font-size:.86rem}
+.tips{margin:4px 0;padding-left:20px;font-size:.92rem}.tips li{margin:4px 0}
+.sum3{margin-top:12px;background:linear-gradient(135deg,#2c2610,#1c1c22);border:1px solid #6a5a2a;border-radius:14px;padding:12px 14px;font-size:.94rem}
+.sum3 b{color:#f2d77e}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#000c;color:#fff;padding:10px 16px;border-radius:999px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+footer{text-align:center;color:var(--mut);font-size:.78rem;margin-top:18px}
+footer a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🐋 고래의 한 문장<small>에니어그램 9번 중재자 부록 · 당신의 목소리도 평화의 일부입니다</small></h1>
+<div class="tabs">
+<button data-tab="t1" class="on">① 결단 30초</button>
+<button data-tab="t2">② 내 목소리</button>
+<button data-tab="t3">③ 실행 계기판</button>
+<button data-tab="t4">④ 9번 중재자</button>
+</div>
+
+<section id="tab-t1">
+<div class="card">
+<h2>🫧 작은 결단 30초</h2>
+<div class="hud"><span>🐋 크기 <b id="gV">0</b></span><span>⏱ <b id="tV">30</b>초</span><span>🌫 미룸 <b id="cV">0</b></span></div>
+<canvas id="gmCv"></canvas>
+<div class="row" style="margin-top:8px"><button class="btn" id="gmGo">▶ 시작</button></div>
+<p class="note">물방울 안의 <b>작은 선택</b>을 3초 안에 골라 주세요. 고르면 고래가 자랍니다. 그냥 두거나 <b>"아무거나"</b>를 누르면 결단을 미룬 셈이라 바다에 안개가 낍니다. 9번의 처방, <b>작은 일부터 결단하고 실행하기</b>를 놀이로 옮겼습니다.</p>
+<div class="res" id="gmRes" hidden></div>
+</div>
+</section>
+
+<section id="tab-t2" hidden>
+<div class="card">
+<h2>✍️ 남에게 묻기 전에, 내가 원하는 것 한 문장</h2>
+<p class="note" style="margin-top:0">안방에 가면 시어머니 말이 옳고, 부엌에 가면 며느리 말이 옳다고 해서는 정작 내 목소리는 어디에도 없습니다. 요즘 정해야 할 일 하나를 떠올리고 적어 보세요.</p>
+<label class="f">정해야 할 일 (선택)</label>
+<input type="text" id="topic" maxlength="40" placeholder="예: 이번 주말 계획, 미뤄 둔 연락…">
+<label class="f">내가 원하는 것은…</label>
+<input type="text" id="want" maxlength="60" placeholder="예: 토요일 오전은 혼자 쉬고 싶다">
+<div class="row" style="margin-top:8px"><button class="btn" id="wantGo">내 목소리 먼저</button></div>
+<div class="res g" id="wantRes" hidden></div>
+<p class="note">적은 말은 저장하거나 보내지 않습니다.</p>
+</div>
+
+<div class="card">
+<h2>👨‍👩‍👦 누이 좋고 매부 좋고, 그럼 나는?</h2>
+<canvas id="nuCv"></canvas>
+<div class="sl"><span>맞춰 주기</span><input type="range" id="nu" min="0" max="100" value="80"><b id="nuV">80%</b></div>
+<div class="say" id="nuSay"></div>
+<p class="note">누이도 좋고 매부도 좋으면, 남동생이자 처남인 <b>나</b>는 손해를 볼 수도 있습니다. 막대 길이는 원고의 비유를 옮긴 개념 그림입니다.</p>
+</div>
+
+<div class="card">
+<h2>🃏 꿈쩍도 않는 9번에게 — 다섯 장의 카드</h2>
+<div class="cards" id="cards"></div>
+<p class="note">카드를 눌러 뒤집어 보세요. 앞면은 원고의 말, 뒷면은 오늘 해 볼 작은 실천입니다.</p>
+</div>
+</section>
+
+<section id="tab-t3" hidden>
+<div class="card">
+<h2>🌊 실행과 태만 — 1분 계기판</h2>
+<p class="note" style="margin-top:0">요즘 일주일을 떠올리며, 각 문장이 나와 얼마나 가까운지 골라 보세요. 저장하지 않습니다.</p>
+<div id="items"></div>
+<canvas id="gaCv"></canvas>
+<div class="res" id="gaRes"></div>
+<p class="note">원고에 나온 건강한 9번과 지나친 9번의 모습으로 만든 <b>성찰용 계기판</b>이며, 검사나 진단이 아닙니다.</p>
+</div>
+</section>
+
+<section id="tab-t4" hidden>
+<div class="card">
+<h2>🐋 에니어그램 9번 · 중재자</h2>
+<div class="say"><b>평화를 사랑하여 갈등을 없애고 싶어 하는 사람.</b> 스스로를 흐르는 강물처럼 평화롭게 살아가는 사람으로 보고 싶어 합니다. 타고난 장점은 <b>편견 없는 안정감</b>.</div>
+<div class="tw"><table class="df"><tbody>
+<tr><th>힘의 중심</th><td>본능형(8·9·1)의 한가운데 · 원의 꼭대기</td></tr>
+<tr><th>두려움</th><td>갈등 속에서 관계가 깨지는 것</td></tr>
+<tr><th>바람</th><td>마음의 평화와 주변의 조화</td></tr>
+<tr><th>피하는 것</th><td>갈등</td></tr>
+<tr><th>방어기제</th><td>혼수상태</td></tr>
+<tr><th>관계 방식</th><td>후퇴형 · 혼자만의 시공간에서 안정</td></tr>
+<tr><th>세상을 보는 눈</th><td>자아와 세계가 비슷한 크기</td></tr>
+<tr><th>시간관념</th><td>시간은 단지 리드미컬한 박자</td></tr>
+<tr><th>미덕 / 악덕</th><td>실행 / 태만</td></tr>
+<tr><th>상징</th><td>동물 고래 · 색 골드</td></tr>
+<tr><th>빛 / 그림자</th><td>세상을 채우는 충만한 사랑 / 결단을 미루는 것</td></tr>
+</tbody></table></div>
+</div>
+
+<div class="card">
+<h2>🪙 동양 수리로 보면 — 九 안의 十</h2>
+<canvas id="numCv"></canvas>
+<div class="say">동양에서 9는 <b>양의 쇠(金)</b>로, 4의 쇠보다 활발하고 더 강하고 단단한 쇠붙이로 묘사됩니다. 아홉 구(九) 자는 열 십(十) 자의 모양을 품고 있어 완성의 10에 훌쩍 다가가 있다고 봅니다. <b>겉은 물처럼 부드러워도 속은 쇠처럼 단단한 사람</b>, 그것이 9번입니다.</div>
+</div>
+
+<div class="card">
+<h2>🪽 날개 · 화살표</h2>
+<canvas id="wgCv"></canvas>
+<div class="row" style="margin-top:8px"><button class="pill on" data-ar="w1">9w1 몽상가</button><button class="pill" data-ar="w8">9w8 조정자</button><button class="pill" data-ar="s6">스트레스 → 6</button><button class="pill" data-ar="g3">통합 → 3</button></div>
+<div class="say" id="arSay"></div>
+</div>
+
+<div class="card">
+<h2>👤 9번으로 추정되는 인물</h2>
+<div class="chips"><span>에이브러햄 링컨</span><span>그레이스 켈리</span><span>게리 쿠퍼</span><span>칼 구스타프 융</span><span>에블린 (영화 〈프라이드 그린 토마토〉)</span></div>
+<p class="note">강의에서 9번으로 <b>추정</b>해 온 인물들입니다. 추정일 뿐 확정은 아닙니다. 에블린은 지난 시간 8번으로 소개한 잇지와 같은 영화에 나옵니다.</p>
+</div>
+
+<div class="card">
+<h2>💬 9번과 잘 지내려면</h2>
+<ol class="tips">
+<li>재촉하기보다 기다려 주되, <b>선택지와 기한</b>은 부드럽게 분명히 해 주세요.</li>
+<li>"<b>어떻게 생각하세요?</b>" 하고 직접 물어봐 주세요. 묻지 않으면 끝까지 말하지 않을 수 있습니다.</li>
+<li><b>작은 실행</b>이라도 해낸 것을 알아봐 주세요. 다음 걸음의 힘이 됩니다.</li>
+<li>웃음 뒤에 감춰 둔 <b>진짜 생각</b>까지 들어 주세요.</li>
+</ol>
+<div class="sum3"><b>9번에게 한마디</b><br>당신의 목소리도 평화의 일부입니다. 당신이 커질수록 세상엔 사랑이 넘쳐납니다. 9번이 자기 자리를 찾을 때, 그 평화는 <b>모두의 평화</b>가 됩니다.</div>
+</div>
+</section>
+
+<footer>© 2026 정필 수심명 · <a href="https://blog.naver.com/omyman" target="_blank" rel="noopener">blog.naver.com/omyman</a><br>에니어그램 9번 중재자 [Psyche 11] 부록 · 인터넷 없이 동작 · 아무것도 저장하지 않음<br>성찰을 돕는 참고용이며 전문 상담을 대신하지 않습니다</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(()=>{
+'use strict';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),1800);}
+let touched=false;document.addEventListener('pointerdown',()=>{touched=true;},{once:true,capture:true});
+const vib=n=>{if(!touched)return;try{navigator.vibrate&&navigator.vibrate(n);}catch(e){}};
+function prep(cv,ratio){const dpr=Math.min(2,window.devicePixelRatio||1),w=cv.clientWidth||320,h=Math.round(w*ratio);
+  cv.width=w*dpr;cv.height=h*dpr;cv.style.height=h+'px';const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);return{c,w,h};}
+function T(c,s,x,y,col,size,al,bl,wt){c.fillStyle=col;c.font=`${wt||''} ${size||12}px -apple-system,"Malgun Gothic",sans-serif`;c.textAlign=al||'center';c.textBaseline=bl||'middle';c.fillText(s,x,y);}
+function single(sel,attr,fn){$$(sel).forEach(b=>b.onclick=()=>{$$(sel).forEach(x=>x.classList.toggle('on',x===b));vib(8);fn(b.dataset[attr]);});}
+function rr(c,x,y,w,h,r){r=Math.min(r,Math.abs(w)/2,Math.abs(h)/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+const GOLD='#e8c35a',MU='#9fb4c0',FG='#eef5f8',OKC='#7ee0a0',BADC='#ff7a6a',SEA='#3aa0c8';
+const escH=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- ① 작은 결단 30초 ---------- */
+const QS=[['점심 메뉴','국수','비빔밥'],['주말 오후','산책','집에서 쉬기'],['먼저 할 일','메일 답장','서류 정리'],['마실 것','커피','차'],['오늘 운동','걷기','스트레칭'],['저녁 메뉴','찌개','구이'],['미뤄 둔 연락','오늘 한다','내일 오전'],['볼 영화','코미디','다큐'],['귀갓길','버스','걸어서'],['읽을 책','소설','에세이'],['휴가지','바다','산'],['오늘 옷 색','파랑','회색']];
+let G=null,hits=[];
+function shuffle(a,r){for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function newGame(){const r=rng(Date.now()&0xffff);return{t:0,size:0,fog:0,qs:shuffle(QS.slice(),r),qi:0,cur:null,gap:.6,last:performance.now(),over:false,dec:0,fast:0,msg:''};}
+function spawn(g){if(g.qi>=g.qs.length)g.qi=0;g.cur={q:g.qs[g.qi++],t0:g.t,flip:Math.random()<.5};}
+function gmDraw(){const{c,w,h}=prep($('#gmCv'),1.0);const g=G||{size:0,fog:0,t:0};
+  const sea=c.createLinearGradient(0,0,0,h);sea.addColorStop(0,'#0e3a55');sea.addColorStop(1,'#04121c');c.fillStyle=sea;c.fillRect(0,0,w,h);
+  for(let i=0;i<6;i++){c.fillStyle='rgba(232,195,90,.06)';c.beginPath();c.moveTo(w*(.1+i*.16),0);c.lineTo(w*(.18+i*.16),0);c.lineTo(w*(.05+i*.16)+40,h);c.lineTo(w*(.0+i*.16)+20,h);c.closePath();c.fill();}
+  // whale
+  const s=.55+Math.min(1.1,g.size/90),wx=w*.24,wy=h*.84,tt=performance.now()/500;c.save();c.translate(wx,wy+Math.sin(tt)*3);c.scale(s,s);
+  c.fillStyle='#2e6f9a';c.beginPath();c.ellipse(0,0,46,22,0,0,7);c.fill();c.beginPath();c.moveTo(-40,0);c.lineTo(-66,-16+Math.sin(tt*1.5)*4);c.lineTo(-62,12+Math.sin(tt*1.5)*4);c.closePath();c.fill();
+  c.fillStyle='#bfe0f0';c.beginPath();c.ellipse(6,8,32,10,0,0,Math.PI);c.fill();c.fillStyle='#07131c';c.beginPath();c.arc(26,-4,3,0,7);c.fill();
+  if(g.size>0){c.fillStyle=GOLD;c.globalAlpha=.8;c.beginPath();c.arc(30,-30,4,0,7);c.arc(36,-44,3,0,7);c.fill();c.globalAlpha=1;}
+  c.restore();
+  hits=[];
+  if(G&&G.cur&&!G.over){const cu=G.cur,el=G.t-cu.t0,f=el/3,by=h*.62-f*h*.3,bx=w*.6,R=Math.min(w*.37,140);
+    c.fillStyle='rgba(190,230,250,.12)';c.strokeStyle='rgba(190,230,250,.6)';c.lineWidth=2;c.beginPath();c.arc(bx,by,R,0,7);c.fill();c.stroke();
+    c.strokeStyle=f>.66?BADC:GOLD;c.lineWidth=4;c.beginPath();c.arc(bx,by,R+6,-Math.PI/2,-Math.PI/2+2*Math.PI*(1-f));c.stroke();
+    T(c,cu.q[0],bx,by-R*.5,FG,15,'center','middle','800');
+    const opts=cu.flip?[cu.q[2],cu.q[1]]:[cu.q[1],cu.q[2]];
+    opts.forEach((o,i)=>{const x=bx-R*.82,y=by-R*.22+i*R*.42,ww=R*1.64,hh=R*.34;c.fillStyle='#e8c35a';rr(c,x,y,ww,hh,10);c.fill();T(c,o,x+ww/2,y+hh/2,'#07131c',14,'center','middle','800');hits.push({x,y,w:ww,h:hh,k:'d'});});
+    const x=bx-R*.45,y=by+R*.62,ww=R*.9,hh=R*.24;c.fillStyle='rgba(255,255,255,.15)';rr(c,x,y,ww,hh,9);c.fill();T(c,'아무거나',x+ww/2,y+hh/2,MU,12,'center','middle','700');hits.push({x,y,w:ww,h:hh,k:'a'});}
+  if(g.fog>0){c.fillStyle=`rgba(200,210,220,${Math.min(.55,g.fog*.07)})`;c.fillRect(0,0,w,h);}
+  if(G&&G.msg){T(c,G.msg,w/2,24,G.msgOk?OKC:BADC,13,'center','middle','800');}
+  if(!G)T(c,'▶ 시작을 누르면 작은 선택이 떠오릅니다',w/2,h*.4,FG,13);}
+function answer(k){const g=G;if(!g||g.over||!g.cur)return;const el=g.t-g.cur.t0;
+  if(k==='d'){g.dec++;g.size+=10+(el<1.5?5:0);if(el<1.5)g.fast++;g.msg=el<1.5?'✨ 바로 결정!':'🐋 결정!';g.msgOk=1;vib(15);}
+  else{g.fog++;g.msg='🌫 "아무거나" — 결정을 미뤘어요';g.msgOk=0;vib(60);}
+  g.cur=null;g.gap=.5;}
+function gmEnd(){const g=G;g.over=true;g.cur=null;gmDraw();const el=$('#gmRes');el.hidden=false;const tot=g.dec+g.fog;
+  el.className='res '+(g.fog<=2?'g':g.fog<=5?'y':'r');
+  el.innerHTML=`30초 동안 <b>${tot}</b>번의 선택 중 <b>${g.dec}</b>번 결정(바로 결정 ${g.fast}번), 미룸 <b>${g.fog}</b>번. 고래 크기 <b>${g.size}</b>. `+(g.fog<=2?'작은 결단이 쌓여 고래가 커졌습니다. <b>스스로 성공하고 스스로 칭찬하라</b>, 오늘은 그래도 됩니다.':g.fog<=5?'결정과 미룸이 반반입니다. 9번에게는 <b>작은 일부터 결단하고 실행하는 것</b>이 처방입니다.':'바다에 안개가 짙어졌습니다. <b>결단을 내리지 않는 것이 최악</b>이라는 말을 떠올려 보세요. 점심 메뉴 같은 작은 결정부터 시작해도 충분합니다.');
+  vib([30,40,60]);$('#gmGo').textContent='▶ 다시';}
+function gmLoop(now){const g=G;if(!g||g.over)return;const dt=Math.min(.05,(now-g.last)/1000);g.last=now;g.t+=dt;
+  if(!g.cur){g.gap-=dt;if(g.gap<=0&&g.t<29)spawn(g);}
+  else if(g.t-g.cur.t0>=3){g.fog++;g.msg='⏳ 시간이 지나 미뤄졌어요';g.msgOk=0;g.cur=null;g.gap=.5;vib(40);}
+  if(g.msg&&g.msgT===undefined)g.msgT=g.t;if(g.msg&&g.t-(g.msgT||0)>1.1){g.msg='';g.msgT=undefined;}
+  $('#gV').textContent=g.size;$('#tV').textContent=Math.max(0,Math.ceil(30-g.t));$('#cV').textContent=g.fog;
+  if(g.t>=30){gmEnd();return;}gmDraw();requestAnimationFrame(gmLoop);}
+$('#gmGo').onclick=()=>{G=newGame();$('#gmRes').hidden=true;$('#gmGo').textContent='진행 중…';requestAnimationFrame(gmLoop);};
+$('#gmCv').addEventListener('pointerdown',e=>{const r=e.currentTarget.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;const hb=hits.find(o=>x>=o.x&&x<=o.x+o.w&&y>=o.y&&y<=o.y+o.h);if(hb){G.msgT=undefined;answer(hb.k);}});
+
+/* ---------- ② 내 목소리 ---------- */
+$('#wantGo').onclick=()=>{const tp=$('#topic').value.trim(),v=$('#want').value.trim(),el=$('#wantRes');el.hidden=false;
+  if(!v){el.className='res y';el.innerHTML='"내가 원하는 것은…" 칸을 먼저 채워 보세요. 한 단어여도 괜찮습니다.';return;}
+  el.className='res g';el.innerHTML=`${tp?`<b>${escH(tp)}</b>에 대해, `:''}내가 원하는 것은 <b>"${escH(v)}"</b>. 이제 남의 의견을 들어도 내 목소리가 사라지지 않습니다. 동화되는 것과 굽히는 것은 다릅니다.`;vib(15);};
+function nuDraw(){const a=+$('#nu').value/100;const{c,w,h}=prep($('#nuCv'),.42);c.fillStyle='#05101a';c.fillRect(0,0,w,h);
+  const bars=[['누이',.5+.45*a,SEA],['매부',.5+.45*a,SEA],['나',Math.max(.05,1-.9*a),a>.6?BADC:GOLD]],L=70,R=w-50;
+  bars.forEach(([lab,v,col],i)=>{const y=18+i*((h-30)/3);T(c,lab,L-10,y+12,lab==='나'?GOLD:FG,13,'right','middle','700');c.fillStyle='#ffffff12';rr(c,L,y,R-L,24,7);c.fill();c.fillStyle=col;rr(c,L,y,(R-L)*v,24,7);c.fill();T(c,Math.round(v*100)+'',L+(R-L)*v+6,y+12,FG,11,'left');});
+  $('#nuV').textContent=Math.round(a*100)+'%';
+  $('#nuSay').innerHTML=a>.6?'모두에게 맞춰 줄수록 <b>나</b>의 막대가 줄어듭니다. 배려가 <b>자기 망각</b>이 되는 지점입니다.':a>.3?'적당히 맞추고, 내 몫도 남겨 두었습니다. 이 균형이 <b>건강한 중재</b>입니다.':'내 몫을 꽤 챙겼군요. 9번이 이 자리까지 오는 데에는 용기가 필요합니다. 당신의 목소리도 <b>평화의 일부</b>입니다.';}
+$('#nu').oninput=nuDraw;
+const CARDS=[['당신의 태만은 옆 사람 속을 터지게 한다.','오늘 미뤄 둔 일 하나를 <b>5분만</b> 시작해 보기.'],['친구 따라 강남 가는 것을 조심하라.','따라가기 전에 <b>"나는 어디 가고 싶지?"</b> 한 번 묻기.'],['스스로 성공하고 스스로 칭찬하라.','오늘 해낸 작은 일 하나를 <b>소리 내어</b> 칭찬하기.'],['당신이 커질수록 세상엔 사랑이 넘쳐난다.','회의나 대화에서 <b>내 의견 한 문장</b> 먼저 말하기.'],['결단을 내리지 않는 것이 최악이다.','"아무거나" 대신 <b>둘 중 하나</b>를 골라 말하기.']];
+$('#cards').innerHTML=CARDS.map((c,i)=>`<button data-c="${i}">${c[0]}</button>`).join('');
+$$('#cards button').forEach(b=>b.onclick=()=>{const i=+b.dataset.c,f=!b.classList.contains('flip');b.classList.toggle('flip',f);b.innerHTML=f?CARDS[i][1]:CARDS[i][0];vib(8);});
+
+/* ---------- ③ 실행 계기판 ---------- */
+const IT=[['해야 할 일을 미루지 않고 해냈다',0],['갈등이 싫어 하고 싶은 말을 삼켰다',1],['남의 의견을 묻기 전에 내 생각을 먼저 말했다',0],['모두에게 맞춰 주다 내가 원하는 것을 잊었다',1],['서로 다른 사람들을 이어 주었다',0],['불편한 일을 잊은 듯 생각을 꺼 버렸다',1],['나 자신을 위한 일을 하나 해냈다',0],['결정을 남에게 미루고 "아무거나"라고 했다',1],['작은 일이라도 스스로 결정했다',0],['친구 따라 강남 간 적이 있다',1]];
+const ans=IT.map(()=>-1);
+$('#items').innerHTML=IT.map((q,i)=>`<div class="it"><div class="q">${i+1}. ${q[0]}</div><div class="seg" data-i="${i}">${['아니다','조금','꽤','매우'].map((l,j)=>`<button data-j="${j}">${l}</button>`).join('')}</div></div>`).join('');
+$$('.seg').forEach(s=>s.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+s.dataset.i;ans[i]=+b.dataset.j;s.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));vib(6);gaDraw();}));
+function gaDraw(){const{c,w,h}=prep($('#gaCv'),.55);const sum=k=>IT.reduce((s,q,i)=>s+(q[1]===k&&ans[i]>0?ans[i]:0),0),P=sum(0)/15,Q=sum(1)/15,done=ans.filter(a=>a>=0).length;
+  const sea=c.createLinearGradient(0,0,0,h);sea.addColorStop(0,'#0e3a55');sea.addColorStop(1,'#04121c');c.fillStyle=sea;c.fillRect(0,0,w,h);
+  const pos=Math.max(.08,Math.min(.92,.5+(P-Q)*.55)),wx=w*pos,wy=h*.55;
+  T(c,'🌫 태만 · 제자리',14,16,MU,11,'left');T(c,'실행 · 앞으로 🐋',w-14,16,GOLD,11,'right');
+  c.strokeStyle='#ffffff22';c.setLineDash([5,5]);c.beginPath();c.moveTo(20,wy+30);c.lineTo(w-20,wy+30);c.stroke();c.setLineDash([]);
+  c.save();c.translate(wx,wy);c.fillStyle='#2e6f9a';c.beginPath();c.ellipse(0,0,40,19,0,0,7);c.fill();c.beginPath();c.moveTo(-34,0);c.lineTo(-56,-14);c.lineTo(-52,10);c.closePath();c.fill();c.fillStyle='#bfe0f0';c.beginPath();c.ellipse(5,7,28,9,0,0,Math.PI);c.fill();c.fillStyle='#07131c';c.beginPath();c.arc(22,-4,3,0,7);c.fill();c.restore();
+  if(Q>P){c.fillStyle=`rgba(200,210,220,${Math.min(.45,(Q-P)*.8)})`;c.fillRect(0,0,w*.5,h);}
+  T(c,`실행 ${Math.round(P*100)}% · 태만 ${Math.round(Q*100)}%`,w/2,h-14,FG,12,'center','middle','700');
+  const el=$('#gaRes');if(done<IT.length){el.className='res y';el.innerHTML=`${done} / ${IT.length} 문항. 모두 고르면 고래가 어느 쪽으로 헤엄치는지 알려 드립니다.`;return;}
+  el.className='res '+(P>=Q+.15?'g':Q>=P+.15?'r':'y');
+  el.innerHTML=P>=Q+.15?'고래가 <b>앞으로</b> 헤엄칩니다. 평화를 바라기만 하지 않고 평화를 위해 움직이는 힘, 9번의 미덕 <b>실행</b>이 살아 있습니다.':Q>=P+.15?'바다에 <b>안개</b>가 꼈습니다. 배려가 자기 망각이 되고 느긋함이 미루기가 되는 때입니다. ① 탭의 <b>작은 결단 30초</b>로 몸을 풀어 보세요.':'고래가 <b>제자리</b>에 떠 있습니다. 오늘 할 수 있는 작은 결정 하나가 방향을 정합니다. <b>그대가 서 있는 곳에서, 그대가 가진 것으로</b>.';}
+
+/* ---------- ④ 9번 중재자 ---------- */
+function numDraw(){const{c,w,h}=prep($('#numCv'),.5);c.fillStyle='#05101a';c.fillRect(0,0,w,h);
+  const fs=Math.min(h*.6,w*.24),SER='"Noto Serif KR","Nanum Myeongjo","AppleMyungjo","Batang",serif';
+  c.font=`700 ${fs}px ${SER}`;c.textAlign='center';c.textBaseline='middle';c.fillStyle=GOLD;c.fillText('九',w*.26,h*.4);c.fillStyle='#ffffff55';c.fillText('十',w*.74,h*.4);
+  c.fillStyle=FG;c.font=`600 ${fs*.35}px -apple-system,sans-serif`;c.fillText('→',w*.5,h*.4);
+  T(c,'9 · 양금',w*.26,h*.8,GOLD,12,'center','middle','700');T(c,'10 · 완성',w*.74,h*.8,MU,12,'center','middle','700');
+  const bx=w*.18,bw=w*.64,by=h*.95+2;c.fillStyle='#ffffff15';for(let i=0;i<10;i++){c.fillStyle=i<9?GOLD:'#ffffff25';rr(c,bx+i*bw/10+1,by-6,bw/10-3,6,2);c.fill();}}
+let ar='w1';
+const AR={w1:[1,'#a8d8ff','<b>9w1 · 몽상가</b> — 이상을 품고 조용히 바른 쪽을 바라봅니다.'],w8:[8,'#ffb84d','<b>9w8 · 조정자</b> — 부드럽지만 필요할 때는 단호하게 판을 정리합니다. 날개를 모르면 같은 9번을 보고도 다른 사람처럼 느끼기 쉽습니다.'],s6:[6,BADC,'<b>스트레스 → 6번</b> — 느긋하던 사람이 갑자기 걱정과 의심이 많아지고, 작은 일에도 불안해합니다.'],g3:[3,OKC,'<b>통합 → 3번(성취가)</b> — 목표를 세우고, 스스로 움직이고, 해낸 일을 기꺼이 드러냅니다. 그래서 9번의 처방은 <b>작은 일부터 결단하고 실행하는 것</b>입니다.']};
+function wgDraw(){const{c,w,h}=prep($('#wgCv'),.62);c.fillStyle='#05101a';c.fillRect(0,0,w,h);const cx=w/2,cy=h/2+6,R=Math.min(w,h)*.38,P=n=>{const a=-Math.PI/2+(n%9)*2*Math.PI/9;return[cx+R*Math.cos(a),cy+R*Math.sin(a)];};
+  c.strokeStyle='#24394a';c.lineWidth=1.5;c.beginPath();c.arc(cx,cy,R,0,7);c.stroke();
+  const[tn,col]=AR[ar];const[a0,b0]=P(9),[a1,b1]=P(tn);c.strokeStyle=col;c.lineWidth=3;c.setLineDash(ar[0]==='w'?[]:[6,4]);c.beginPath();c.moveTo(a0,b0);c.lineTo(a1,b1);c.stroke();c.setLineDash([]);
+  if(ar[0]!=='w'){const an=Math.atan2(b1-b0,a1-a0),ex=a1-Math.cos(an)*16,ey=b1-Math.sin(an)*16;c.fillStyle=col;c.beginPath();c.moveTo(ex,ey);c.lineTo(ex-10*Math.cos(an-.45),ey-10*Math.sin(an-.45));c.lineTo(ex-10*Math.cos(an+.45),ey-10*Math.sin(an+.45));c.closePath();c.fill();}
+  for(let n=1;n<=9;n++){const[x,y]=P(n),on=n===tn;c.fillStyle=n===9?GOLD:on?col:'#162a38';c.beginPath();c.arc(x,y,n===9?18:14,0,7);c.fill();T(c,n+'',x,y+1,n===9||on?'#07131c':MU,n===9?15:12,'center','middle','800');}
+  T(c,'🐋 원의 꼭대기',P(9)[0]+26,P(9)[1]-2,GOLD,11,'left');$('#arSay').innerHTML=AR[ar][2];}
+single('[data-ar]','ar',v=>{ar=v;wgDraw();});
+
+/* ---------- 공통 ---------- */
+function redraw(){if(!$('#tab-t1').hidden)gmDraw();if(!$('#tab-t2').hidden)nuDraw();if(!$('#tab-t3').hidden)gaDraw();if(!$('#tab-t4').hidden){numDraw();wgDraw();}}
+function show(t){$$('.tabs button').forEach(x=>x.classList.toggle('on',x.dataset.tab===t));['t1','t2','t3','t4'].forEach(k=>$('#tab-'+k).hidden=k!==t);redraw();window.scrollTo(0,0);}
+$$('.tabs button').forEach(b=>b.onclick=()=>show(b.dataset.tab));
+let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(redraw,120);});
+setInterval(()=>{if(!$('#tab-t1').hidden&&(!G||G.over))gmDraw();},150);
+redraw();
+
+})();
+</script>
+</body>
+</html>
